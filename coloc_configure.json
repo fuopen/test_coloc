@@ -1,0 +1,64 @@
+{
+	"Prerequisite": {
+		"programming language": "R",
+		"Modules": [
+		{
+			"module": "scales",
+			"version": "1.2.0"
+		},
+		{
+			"module": "rjson",
+			"version": "0.2.21"
+		},
+		{
+			"module": "knitr",
+			"version": "1.39"
+		},
+		{
+			"module": "markdown",
+			"version": "1.1"
+		},
+		{
+			"module": "imager",
+			"version": "0.42.13"
+		},
+		{
+			"module": "coloc",
+			"version": "5.1.0"
+		}
+		]
+	},
+	"PipelineSetting": {
+		"CodePath": "/home/thinkthink/pipelines/coloc_pipeline//code/",
+		"DataPath": "/home/thinkthink/pipelines/coloc_pipeline//data/"
+	},
+	"PipelineStructure": {
+		"MainScript": "Run_coloc_suise.sh",
+		"MainJson": "coloc_configure.json",
+		"Scriptstrucutre": {
+		"JsonParseRscript": "coloc_Json_parse.R",
+			"MainRscript": "coloc_report.R",
+			"S0": {	
+			"RmdFile": "coloc_report.Rmd",
+			"S1": {
+				"S1File": "run_suise_coloc.R",
+				"S2": {
+					"S2File": "Coloc_locus_zoom2.R"
+					}
+				}
+			}
+		}	
+	},
+	"Inputsetting": {
+		"user": "Demo123",
+		"study_name": "Demo_suise_coloc",
+		"InputPath": "/home/thinkthink/pipelines/coloc_pipeline//input/",
+		"OutPath": "/home/thinkthink/pipelines/coloc_pipeline//output/",
+		"PlotLDPath": "/home/thinkthink/pipelines/coloc_pipeline//input/Example.ld",
+		"InputDataFile": "test_suise.rds",
+		"InputLDMatFile": "ld_matrix_generate.rds",
+		"GeneticMap": "/home/thinkthink/pipelines/coloc_pipeline/data/genetic_map_chr16_GRCh37.txt",
+		"GeneRegFile": "/home/thinkthink/pipelines/coloc_pipeline/data/UCSC_GRCh37_Genes_UniqueList2021.txt",
+		"leadSNP": "rs11646512"
+	}
+} 	

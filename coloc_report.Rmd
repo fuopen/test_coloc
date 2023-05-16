@@ -1,0 +1,79 @@
+```{r init, echo=FALSE}
+
+suppressPackageStartupMessages(library(knitr))
+suppressPackageStartupMessages(library(Cairo))
+opts_chunk$set(warning=FALSE, echo=FALSE, message=FALSE, results='asis', fig.width=6, fig.height=6, dev="png", fig.path=paste0('figure/', sanitise_string(title)))
+
+```
+
+# Coloc report
+
+---
+
+## `r title`
+
+Date: **`r format(Sys.time(), '%d %B, %Y')`**
+
+---
+
+### Results from Colocalisation: Bayes factor:
+
+```{r chunk1 }
+
+kable(m$colocAbf, row.names=FALSE)
+
+```
+
+---
+
+
+### Results from Colocalisation: Suise
+
+```{r chunk2 }
+
+kable(m$colocSuise)
+
+```
+
+---
+
+
+### Overview of the colocalisation signals `r ppz`(Bayes Factor) and `r pps`(Suise):
+
+```{r,label="chunk3",dpi=300,fig.width=7}
+par(mar=c(0,0,0,0),mgp=c(0,0,0))
+plot(coloc.p,axes=F,ann=F)
+
+```
+
+---
+
+
+### Check original GWAS p-value
+
+```{r,label="chunk5"}
+
+kable(vv)
+
+```
+
+---
+
+### Coloc.abf Senstivity analysis
+
+```{r, label="chunk6", dev="pdf",fig.width=7}
+#knitr::opts_chunk$set(dpi=300,fig.width=7)
+#plot(rnorm(1000))
+sensitivity(c.abf,rule='H4>0.8')
+```
+
+---
+
+### Coloc.suise Sensitivity analysis
+
+```{r, label="chunk7", dev="pdf",fig.width=7}
+#knitr::opts_chunk$set(dpi=300,fig.width=7)
+for(i in length(pps)){
+    sensitivity(c.sui,rule='H4>0.9',row=vz[i],dataset1=gcl[[1]],dataset2=gcl[[2]])
+}
+```
